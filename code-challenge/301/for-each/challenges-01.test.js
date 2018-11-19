@@ -9,11 +9,14 @@ Then, write a function named speaker that takes in a string and a callback funct
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
+  return word = word.toUpperCase();
 }
 
 const speaker = (message, callback) => {
-  // Solution code here...
+  if(callback){
+   return message = message.toUpperCase();
+  }
+    
 }
 
 /* ------------------------------------------------------------------------------------------------
