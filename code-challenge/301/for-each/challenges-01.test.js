@@ -11,12 +11,15 @@ Then, write a function named speaker that takes in a string and a callback funct
 const greeting = (word) => {
   return word = word.toUpperCase();
 };
-
 const speaker = (message, callback) => {
-  if(callback){
-    return message = message.toUpperCase();
-  }
+  return callback(message);
 };
+
+// const speaker = (message, callback) => {
+//   if(callback){
+//     return message = message.toUpperCase();
+//   }
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -38,14 +41,21 @@ const addValues = (arr, value) => {
   arr.push(value);
 };
 
+
 const addNumbers = (num, arr, times, callback) => {
-  if(callback){
-    for(let i = 0; i < times; i++){
-      addValues(arr, num);
-    }
-  return arr;
+  for(let i = 0; i < times; i++){
+    callback(arr, num);
   }
+  return arr;
 };
+// const addNumbers = (num, arr, times, callback) => {
+//   if(callback){
+//     for(let i = 0; i < times; i++){
+//       addValues(arr, num);
+//     }
+//     return arr;
+//   }
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -66,10 +76,10 @@ const removeOne = (num, arr) => {
 };
 
 const removeElements = (arr, callback) => {
-    for(let i in arr){
-      callback(arr[i], arr);
-    } 
-   return arr;
+  for(let i in arr){
+    callback(arr[i], arr);
+  }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -92,11 +102,20 @@ This function should use forEach again, but rather than taking in a callback as 
 
 This anonymous function should accept up to three arguments: the element, the index, and the array.
 ------------------------------------------------------------------------------------------------ */
-
 const removeWithAnon = (arr) => {
-  // Solution code here...
-}
+  arr.forEach(function (element){
+    if(element % 3 === 2){
+      arr.pop();
+    }
+  });
+  return arr;
+};
 
+
+
+// arr.forEach(function callback(currentValue[, index[, array]]) {
+//   //your iterator
+// }[, thisArg]);
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
@@ -115,8 +134,14 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
-}
+  var arr = [];
+  availableItems.forEach(element => {
+    if(element.available === true){
+      arr.push(element.name);
+    }
+  });
+  return arr;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -134,7 +159,7 @@ Return the resulting output array.
 
 const fizzbuzz = (arr) => {
   // Solution code here...
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -182,7 +207,7 @@ describe('Testing challenge 5', () => {
 });
 
 describe('Testing challenge 6', () => {
-  const inventory = [{ name: 'apples', available: true }, { name: 'pears', available: true }, { name: 'oranges', available: false }, { name: 'bananas', available: true }, { name: 'blueberries', available: false }];
+  const inventory = [{ name: 'apples', available: true, }, { name: 'pears', available: true, }, { name: 'oranges', available: false, }, { name: 'bananas', available: true, }, { name: 'blueberries', available: false, }];
 
   test('It should only add the available items to the list', () => {
     expect(createList(inventory)).toStrictEqual(['apples', 'pears', 'bananas']);
