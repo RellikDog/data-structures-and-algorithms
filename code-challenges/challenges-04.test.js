@@ -66,9 +66,7 @@ const matchMonth = (input) => {
   // Solution code here...
 //   let reg = new RegExp(/\^oct/g);
 //   return reg.test(input);
-  input = input.toLowerCase();
-  let regex = /^(oct)(ober)$/;
-  return regex.test(input);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
