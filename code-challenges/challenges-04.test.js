@@ -66,7 +66,14 @@ const matchMonth = (input) => {
   // Solution code here...
 //   let reg = new RegExp(/\^oct/g);
 //   return reg.test(input);
-
+  if(typeof input === 'undefined'){
+    return false;
+  }else if(Number.isInteger(input)){
+    return false;
+  }else if(input.match(/^[Oo](ct)(ober)*$/g)){
+    return true;
+  } else
+    return false;
 };
 
 /* ------------------------------------------------------------------------------------------------
