@@ -83,11 +83,21 @@ const gruffaloCrumble = {
 const listFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  var newArr = [];
   for(let i in recipe.ingredients){
-    let newStr = recipe.ingredients[i].slice(' ', 2);
-    result.push(newStr);
+    let breakPoint = ' ';
+    let newStr = recipe.ingredients[i];
+    newStr = newStr.slice(newStr.indexOf(breakPoint));
+    newArr.push(newStr);
   }
-
+  for(let i in newArr){
+    let breakPoint = ' ';
+    let newStr = newArr[i];
+    newStr = newStr.slice(1);
+    newStr = newStr.slice(newStr.indexOf(breakPoint));
+    newStr = newStr.slice(1);
+    result.push(newStr);
+  };
   return result;
 };
 
@@ -125,6 +135,12 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 const stepActions = (recipe) => {
   let result = [];
   // Solution code here...
+  let breakPoint = ' ';
+  for(let i in recipe.steps){
+    let newStr = recipe.steps[i];
+    newStr = newStr.slice(0, newStr.indexOf(breakPoint));
+    result.push(newStr);
+  }
   return result;
 };
 
@@ -143,6 +159,15 @@ For example:
 
 const removeEvenValues = (arr) => {
   // Solution code here...
+  for(let i in arr){
+    if(arr[i] % 2 === 0 || arr[i] === 2){
+      arr.splice(arr[i] - 1, 1);
+    }
+  }
+  if(arr[arr.length - 1] % 2 === 0){
+    arr.pop();
+  }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,7 +271,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return a list of recipe steps', () => {
     expect(stepActions(gruffaloCrumble)).toStrictEqual(['Pre-heat', 'De-prickle', 'Sprinkle', 'Mix', 'Grease', 'Combine', 'Fold', 'Spread', 'Bake']);
     expect(stepActions(gruffaloCrumble).length).toStrictEqual(9);
