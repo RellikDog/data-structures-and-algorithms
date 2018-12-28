@@ -32,7 +32,7 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  let reg = new RegExp(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/);
+  let reg = new RegExp(/((^([A-Z]|[0-9])*\.([A-Z]|[0-9])+)|(^([A-Z]|[0-9])+)+)+\@(([A-Z]|[0-9])+((.com)|(.net)|(.org))+)/gi);
   return reg.test(email);
 };
 
@@ -56,9 +56,11 @@ Your function should include a single regular expression pattern that matches an
 
 Return either true or false.
 ------------------------------------------------------------------------------------------------ */
-
+//https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number by francis Gagnon
 const validatePhoneNumber = (phoneNumber) => {
   // Solution code here...
+  let reg = new RegExp(/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g);
+  return reg.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -127,7 +129,7 @@ describe('Testing challenge 2', () => {
   })
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should match the acceptable phone number formats', () => {
     expect(validatePhoneNumber('(555) 555-5555')).toBeTruthy();
     expect(validatePhoneNumber('555 555-5555')).toBeTruthy();
