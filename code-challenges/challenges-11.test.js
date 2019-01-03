@@ -32,7 +32,7 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  let reg = new RegExp(/((^([A-Z]|[0-9])*\.([A-Z]|[0-9])+)|(^([A-Z]|[0-9])+)+)+\@(([A-Z]|[0-9])+((.com)|(.net)|(.org))+)/gi);
+  let reg = new RegExp(/^[a-zA-Z]+([.][a-zA-Z]+)?[@][a-zA-Z]+(.com|.net|.org)$/);
   return reg.test(email);
 };
 
@@ -59,7 +59,7 @@ Return either true or false.
 //https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number by francis Gagnon
 const validatePhoneNumber = (phoneNumber) => {
   // Solution code here...
-  let reg = new RegExp(/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g);
+  let reg = new RegExp(/^(\d{3}|[(]\d{3}[)])(\s|[-])?\d{3}(\s|[-])?\d{4}$/);
   return reg.test(phoneNumber);
 };
 
@@ -74,7 +74,17 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 
 const findTagNames = elements => {
   // Solution code here...
-}
+  let reg = new RegExp(/[\/]\w+/g);
+  let newArr = [];
+
+  elements.forEach(ele => {
+    let tags = ele.match(reg);
+    tags.forEach( tag => {
+      newArr.push(tag);
+    });
+  });
+  return newArr;
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -153,7 +163,7 @@ describe('Testing challenge 3', () => {
   })
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return the closing tags', () => {
     expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual([ '/h1', '/p' ]);
   });
