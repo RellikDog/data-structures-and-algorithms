@@ -159,6 +159,19 @@ Return the resulting output array.
 
 const fizzbuzz = (arr) => {
   // Solution code here...
+  var newArr = [];
+  arr.forEach(ele => {
+    if((ele % 5 === 0) && (ele % 3 === 0)){
+      newArr.push('Fizz Buzz');
+    }else if(ele % 5 === 0){
+      newArr.push('Buzz');
+    }else if(ele % 3 === 0){
+      newArr.push('Fizz');
+    }else {
+      newArr.push(ele);
+    }
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
